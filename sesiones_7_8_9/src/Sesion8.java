@@ -1,16 +1,7 @@
 import java.util.Scanner;
 
-public class Errores
-{
-    public static void main(String[] args) {
-        //errorDivisionPorCero();
-        //errorDivisionPorCeroTry();
-        //errorOutOfBounds();
-        //errorOutOfBoundsTry();
-        errorLogico();
-    }
-
-    private static void errorDivisionPorCero() {
+public class Sesion8 {
+    public static void errorDivisionPorCero() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Introduce dos números: ");
 
@@ -22,7 +13,7 @@ public class Errores
         System.out.println("El resultado es: " + resultado);
     }
 
-    private static void errorDivisionPorCeroTry() {
+    public static void errorDivisionPorCeroTry() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Introduce dos números: ");
 
@@ -37,30 +28,24 @@ public class Errores
         }
     }
 
-    private static void errorOutOfBounds() {
-        int numeros[] = new int[3];
-        int pos = numeros[3];
+    public static void errorOutOfBounds() {
+        int []numeros = new int[3];
+        System.out.println(numeros[3]);
     }
 
-    private static void errorOutOfBoundsTry() {
+    public static void errorOutOfBoundsTry() {
         try {
-            int numeros[] = new int[3];
-            int pos = numeros[3];
+            int []numeros = new int[3];
+            System.out.println(numeros[3]);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Estás accediendo a un elemetno que no existe: " + e.getMessage());
         }
     }
 
-    private static void errorLogico() {
+    public static void errorLogico() {
         int a = 5;
         int b = 10;
         int resultado = a - b;
         System.out.println("El resultado de sumar a + b es = " + resultado);
     }
 }
-
-//public class ValoresIncorrectosException extends Exception {
-//    public ValoresIncorrectosException(String errorMessage) {
-//        super(errorMessage);
-//    }
-//}

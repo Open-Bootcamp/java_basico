@@ -1,16 +1,10 @@
 import java.math.BigDecimal;
 import java.util.*;
 
-public class Ejemplos {
-    public static void main(String[] args) {
-        // demoStrings();
-        // demoArrays();
-        // demoVector();
-        // demoList();
-        // demoMap();
-        //demoMath();
-    }
-
+public class Sesion7 {
+    // En esta función suprimo los warnings de ConstantConditions, arrojados por los "if"
+    // de starts/endsWith al ser siempre cierta/falsa la condición.
+    @SuppressWarnings("ConstantConditions")
     public static void demoStrings() {
         // Declarar un string
         String cadena = "Esto es una cadena";
@@ -52,9 +46,12 @@ public class Ejemplos {
         }
     }
 
+    // Para mostar una copia de array a mano, hay una copia literal en un for abajo del todo.
+    // Como esto es un warning, vamos a suprimirlo, ya que queremos mostrar el ejemplo.
+    @SuppressWarnings("ManualArrayCopy")
     public static void demoArrays() {
         // Declarar un array
-        int arrayUno[] = new int[5];
+        int []arrayUno = new int[5];
 
         // Asignar valores a un array previamente declarado:
         arrayUno[0] = 1;
@@ -64,7 +61,7 @@ public class Ejemplos {
         arrayUno[4] = 5;
 
         // Declarar e inicializar un array
-        String arrayDos[] = {"Naranja", "Limon", "Pomelo"};
+        String []arrayDos = {"Naranja", "Limon", "Pomelo"};
 
         // Recorrer un array:
         for (int i = 0; i < arrayUno.length; i++) {
@@ -77,7 +74,7 @@ public class Ejemplos {
         }
 
         // Declarar un array multidimensional
-        int arrayBidiUno[][] = new int[2][4];
+        int [][]arrayBidiUno = new int[2][4];
 
         // Asignar valores a un array multidimensional previamente declarado:
         arrayBidiUno[0][0] = 1;
@@ -90,12 +87,6 @@ public class Ejemplos {
         arrayBidiUno[1][2] = 30;
         arrayBidiUno[1][3] = 40;
 
-        // Declarar e inicializar un array multidimensional
-        int arrayBidiDos[][] = {
-                {1, 2, 3, 4},
-                {10, 20, 30, 40},
-        };
-
         // Recorrer un array bidimensional:
         for (int i = 0; i < arrayBidiUno.length; i++) {
             for (int j = 0; j < arrayBidiUno[i].length; j++) {
@@ -103,19 +94,36 @@ public class Ejemplos {
             }
         }
 
+        // Declarar e inicializar un array multidimensional
+        int [][]arrayBidiDos = {
+                {1, 2, 3, 4},
+                {10, 20, 30, 40},
+        };
+
+        // Recorrer un array bidimensional:
+        for (int i = 0; i < arrayBidiDos.length; i++) {
+            for (int j = 0; j < arrayBidiDos[i].length; j++) {
+                System.out.println("Posición: [" + i + "][" + j + "] y contiene el valor " + arrayBidiDos[i][j]);
+            }
+        }
+
         // "Crecer" un array.
         // Solo podemos hacerlo creando uno nuevo de más tamaño y llenándolo con el contenido del original.
         int nuevoArrayLen = arrayUno.length * 2;
-        int nuevoArray[] = new int[nuevoArrayLen];
+        int []nuevoArray = new int[nuevoArrayLen];
 
+        // Esto dará un warning: Copia manual del array
         for (int i = 0; i < arrayUno.length; i++) {
             nuevoArray[i] = arrayUno[i];
         }
+
+        // Para copiar un array "elegántemente":
+        System.arraycopy(nuevoArray, 0, arrayUno, 0, arrayUno.length);
     }
 
     public static void demoVector() {
         // Un vector es similar a un array, pero puede (de)crecer dinámicamente.
-        Vector<Integer> vector = new Vector<Integer>();
+        Vector<Integer> vector = new Vector<>();
 
         // Añadir elementos
         vector.add(1);
@@ -172,7 +180,7 @@ public class Ejemplos {
         // darle un tamaño de autocrecimiento (a diferencia del Vector), y utiliza la formula previa.
 
         // Crear una lista de tipo ArrayList:
-        ArrayList<String> lista = new ArrayList<String>();
+        ArrayList<String> lista = new ArrayList<>();
 
         // Añadir elementos
         lista.add("Uno");
@@ -209,7 +217,7 @@ public class Ejemplos {
         }
 
         // Podemos convertir una lista en un array:
-        String array[] = new String[lista.size()];
+        String []array = new String[lista.size()];
         for (int i = 0; i < lista.size(); i++) {
             array[i] = lista.get(i);
         }
@@ -225,6 +233,11 @@ public class Ejemplos {
 
         // Las listas pueden ser de más tipos, además de ArrayList:
         LinkedList<String> listaEnlazada = new LinkedList<>();
+
+        // Y tienen las mismas operaciones que un ArrayList:
+        listaEnlazada.add("Hola");
+        System.out.println(listaEnlazada.get(0));
+        listaEnlazada.remove("Hola");
 
         // Y pueden copiarse unas a otras
         LinkedList<String> listaEnlazadaDos = new LinkedList<>(lista);
@@ -249,7 +262,6 @@ public class Ejemplos {
         // Hay más tipos, ¡búscalos!
     }
 
-    //@SuppressWarnings("rawtypes")
     public static void demoMap() {
         // Los mapas implementan colecciones "clave" = "valor".
 
@@ -277,22 +289,23 @@ public class Ejemplos {
         mapa.replace("clave3", 100);
 
         // Recorrer un mapa:
-        for (Map.Entry elemento : mapa.entrySet()) {
+        for (Map.Entry<String, Integer> elemento : mapa.entrySet()) {
             System.out.println("Clave: " + elemento.getKey() + " - Valor: " + elemento.getValue());
         }
     }
 
     public static void demoMath() {
-        // Math es muy preciso con decimales utilizando BigDecimal
-        BigDecimal valorA = new BigDecimal(3.14);
-        BigDecimal valorB = new BigDecimal(3.15);
+        // Math es muy preciso con decimales utilizando BigDecimal.
+        double valorInicial = 3.14f;
+        BigDecimal valorA = BigDecimal.valueOf(valorInicial);
+
+        double valorSecundario = 3.15f;
+        BigDecimal valorB = BigDecimal.valueOf(valorSecundario);
 
         // Suma el BigDecimal "valorB" a "valorA"
-        valorA.add(valorB);
+        BigDecimal resultado = valorA.add(valorB);
 
         // Imprime la suma
-        System.out.println(valorA.toString());
-
-        valorA.multiply(valorB);
+        System.out.println(resultado);
     }
 }

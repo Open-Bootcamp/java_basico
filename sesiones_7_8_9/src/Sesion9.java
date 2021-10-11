@@ -3,28 +3,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class Streams
+public class Sesion9
 {
-    public static void main(String []args) {
-        try {
-            InputStream fichero = new FileInputStream("/etc/passwd");
-
-            try {
-                System.out.println("longitud para leer: " + fichero.available());
-
-                byte []datos = new byte[15];
-                int data = fichero.read(datos);
-                System.out.println(new String(datos));
-            } catch (IOException e) {
-                System.out.println("Error al leer: " + e.getMessage());
-            }
-
-        } catch (FileNotFoundException e) {
-            System.out.println("Error al abrir fichero: " + e.getMessage());
-        }
-    }
-
-    public static void leerFichero() {
+    public static void leerTodo() {
         try {
             InputStream fichero = new FileInputStream("/etc/passwd");
 
@@ -45,7 +26,7 @@ public class Streams
         }
     }
 
-    public static void leerFichero2() {
+    public static void leerByteAByte() {
         try {
             InputStream fichero = new FileInputStream("/etc/passwd");
 
