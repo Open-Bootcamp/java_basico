@@ -1,0 +1,12 @@
+{
+  "credenciales": {
+    "usuario": "openbootcamp",
+    "clave": "EstoEs1clave^_^",
+
+    "videos": [
+      "Primera sesión",
+      "Segunda sesión",
+      "Tercera sesión"
+    ]
+  }
+}
